@@ -1,0 +1,14 @@
+organization := "com.bk"
+scalaVersion := "2.11.11"
+name := "spark-entity-extraction"
+
+libraryDependencies ++= Seq(
+  "com.bk" %% "entity-extraction" % "0.1-SNAPSHOT",
+  "org.apache.spark" % "spark-sql_2.11" % "2.2.0" % "provided"
+)
+
+lazy val app = (project in file("app")).
+  settings(
+    mainClass in assembly := Some("com.bk.nlp.entity.spark.SparkDriver"),
+    assemblyJarName in assembly := "spark-entity-extraction.jar"
+  )
