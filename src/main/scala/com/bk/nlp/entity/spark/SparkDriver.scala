@@ -9,11 +9,12 @@ object SparkDriver {
   import org.apache.spark.sql.SparkSession
 
   def main(args: Array[String]) {
-    val filesDir = "./test-data/*"
+    val filesDir = args.head
     val sparkSession = SparkSession.builder.appName("Named Entity Extractor").getOrCreate()
     val textData = sparkSession.sparkContext.wholeTextFiles(filesDir).cache()
     val entityData = textData.map { fileTuple => (fileTuple._1,  EntityRecognition.extractEntities(fileTuple._2))  }
-    printEntities(entityData)
+
+    entityData.saveAsTextFile(s"${filesDir}entities")
     sparkSession.stop()
   }
 
