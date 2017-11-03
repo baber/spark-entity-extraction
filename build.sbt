@@ -3,7 +3,7 @@ scalaVersion := "2.11.11"
 name := "spark-entity-extraction"
 
 resolvers ++= Seq[Resolver](
-  s3resolver.value("Snapshots resolver", s3("com.ee.bdec.coderepo"))
+  s3resolver.value("Snapshots resolver", s3("com.ee.bdec.coderepo")) withIvyPatterns
 )
 
 publishMavenStyle := false
